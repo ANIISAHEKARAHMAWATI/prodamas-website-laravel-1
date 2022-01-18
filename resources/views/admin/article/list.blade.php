@@ -14,7 +14,7 @@ Article Submission
 @endif
 
 <a href="/admin/add-article" class="btn btn-primary mb-3">Add New Article</a>
-<table class="table">
+<table class="table" id="tableArtikel"> <!--sesuai dg ini-->
     <thead class="thead-light">
         <tr>
             <th scope="col">ID</th>
@@ -89,4 +89,12 @@ Article Submission
     </div>
   </div>
 @endforeach
+@endsection
+
+@section('table')
+    <script>
+      $(document).ready(function() {
+          $('#tableArtikel').DataTable(); //sesuikan id tabel yg dibat
+      } );
+    </script>
 @endsection
