@@ -14,7 +14,7 @@ Video Submission
 @endif
 
 <a href="/admin/add-video" class="btn btn-primary mb-3">Tambah Video</a>
-<table class="table">
+<table class="table" id="tableVideo">
     <thead class="thead-light">
         <tr>
             <th scope="col">ID</th>
@@ -49,4 +49,12 @@ Video Submission
         @endforelse
     </tbody>
 </table>
+@endsection
+
+@section('table')
+    <script>
+      $(document).ready(function() {
+          $('#tableVideo').DataTable(); //sesuikan id tabel yg dibat
+      } );
+    </script>
 @endsection
