@@ -16,7 +16,9 @@
             @if ($audio->gambar_sampul)
                 <p>{{$audio->gambar_sampul}}</p>
             @endif
-            <input type="file" name="gambar_sampul" class="form-control" id="gambar_sampul">
+            @if ($audio->gambar_sampul)
+                <p>{{$audio->gambar_sampul}}</p>
+            @endif            
             @error('gambar_sampul')
                 <div class="alert alert-danger">
                     {{ $message }}
