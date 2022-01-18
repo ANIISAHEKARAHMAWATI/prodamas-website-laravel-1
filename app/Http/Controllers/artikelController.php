@@ -22,20 +22,28 @@ class artikelController extends Controller
         return view('artikel.index', compact('artikel','artikelupdate'));
     }
 
-    public function beranda()
+     public function beranda()
     {
         $artikel = ArticleAdmin::where('status', 'published') 
                 ->orderBy('id', 'asc') 
                 ->take(3) 
                 ->get();
-        
+
         $video = VideoAdmin::orderBy('id', 'asc') 
                 ->take(3) 
                 ->get();
 
-        // dd($video);
+        $foto = FotoAdmin::orderBy('id', 'asc') 
+                ->take(3) 
+                ->get();
+
+        $audio = AudioAdmin::orderBy('id', 'asc') 
+                ->take(3) 
+                ->get();
+
+        // dd($audio);
       
-        return view('beranda.index', compact('artikel','video'));
+        return view('beranda.index', compact('artikel','video','foto','audio'));
     }
 
     public function show($id){
