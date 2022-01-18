@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ArticleAdmin;
-use DB;
-use File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
@@ -87,7 +87,6 @@ class ArticleController extends Controller
 
     public function update($id, Request $request) {
         $request->validate([
-            'status' => 'required',
             'gambar_sampul' => 'mimes:jpeg,jpg,png|max:2200',
             'text_sampul' => 'required',
             'judul' => 'required',
@@ -100,11 +99,11 @@ class ArticleController extends Controller
         if ($request->has('picture')) {
             File::delete("articleProd/sampul/".$article->picture);
             $picture = $request->picture;
-            $pathThumb = time() . ' - ' . $picture->getClientOriginalName();
-            $picture->move('articleProd/sampul/', $pathThumb);
+            $new_sampul = time() . ' - ' . $picture->getClientOriginalName();
+            $picture->move('articleProd/sampul/', $new_sampul);
             $article_data = [
                 "status" => $request["status"],
-                "gambar_sampul" => $pathThumb,
+                "gambar_sampul" => $new_sampul,
                 "text_sampul" => $request["text-sampul"],
                 "judul" => $request["judul"],
                 "slug" => $request["slug"],
@@ -113,8 +112,7 @@ class ArticleController extends Controller
             ];
         } else {
             $article_data = [
-                "status" => $request["status"],
-                "gambar-sampul" => $pathThumb,
+                //"gambar-sampul" => $pathThumb,
                 "text_sampul" => $request["text_sampul"],
                 "judul" => $request["judul"],
                 "slug" => $request["slug"],
