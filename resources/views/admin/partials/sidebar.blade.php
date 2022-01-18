@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-light-primary elevation-4 fixed-top" style="background-color: #E7DCF3">
+<aside class="main-sidebar sidebar-light-primary elevation-4" style="background-color: #E7DCF3">
     <!-- Brand Logo -->
     <div class="brand-link">
         <img src="{{ asset('img/logoprodamas.png') }}"
