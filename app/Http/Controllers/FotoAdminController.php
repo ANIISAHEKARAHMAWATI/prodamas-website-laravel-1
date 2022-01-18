@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FotoAdmin;
-use DB;
-use File;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
+// use File;
 
 class FotoAdminController extends Controller
 {
@@ -19,26 +21,54 @@ class FotoAdminController extends Controller
     {
         $this->validate($request,[
             'judul' => 'required',
-            'konten' => 'required|file|image|max:2200',
+            'konten' => 'required',
             'caption' => 'required',
         ]);
 
-        $extFoto = $request->konten->getClientOriginalExtension();
-        $pathFoto = "foto-".time().".".$extFoto;
-        $pathStore = $request->konten->move(public_path('fotoProd/'), $pathFoto);
+        // dd($request->konten);
 
-        FotoAdmin::create([
-            "judul" => $request["judul"],
-            "konten" => $pathFoto,
-            "caption" => $request["caption"],
-        ]);
+        // foreach (array_filter($request->konten, 'strlen') as $item => $value) {
+            
+        //     $extFoto[$item] = $request->konten[$item]->getClientOriginalExtension();
+        //     $pathFoto[$item] = "foto-".time().".".$extFoto[$item];
+        //     $pathStore[$item] = $request->konten[$item]->move(public_path('fotoProd/'), $pathFoto[$item]);
+        //     $gambar = array(
+        //         'judul' => $request->judul,
+        //         'konten' => $pathFoto[$item],
+        //         'caption' => $request->caption
+        //     );            
+
+        //     FotoAdmin::insert($gambar);
+        //     // dd($gambar);
+        // }
+
+        $files = [];
+        foreach ($request->file('konten') as $file) {
+            if ($file->isValid()) {
+                $konten = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file->getClientOriginalName());
+                $file->move(public_path('fotoProd/'), $konten);                    
+                $files[] = [
+                    'judul' => $request->judul,
+                    'konten' => $konten,
+                    'caption' => $request->caption
+                ];
+            }
+        }
+        FotoAdmin::insert($files);
+
+        // FotoAdmin::create([
+        //     "judul" => $request["judul"],
+        //     "konten" => $pathFoto,
+        //     "caption" => $request["caption"],
+        // ]);
 
         return redirect('/admin/list-foto')->with('success', 'Foto Berhasil Ditambahkan!');
     }
 
     public function index()
     {
-        $fotos = FotoAdmin::all();
+        $fotos = FotoAdmin::groupBy('judul')->get();
+        // dd($fotos);
         return view('admin.foto.list', compact('fotos'));
     }
 
