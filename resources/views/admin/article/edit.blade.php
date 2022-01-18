@@ -18,19 +18,7 @@
         @method('put')
         <div class="form-group">
             <label for="status">Status</label>
-            <select class="form-control" name="status" id="id_status" placeholder="status" value="{{$article->status}}">
-                <option value="">{{$article->status}}</option>
-                @if ($article->status = 'published')
-                <option value="unpublished">Unpublished</option>
-                @else
-                <option value="published">Published</option>
-                @endif
-            </select> 
-            @error('status')
-                <div class="alert alert-danger">
-                    {{ $message }}
-                </div>
-            @enderror
+                <input type="text" class="form-control" value="{{ $article->status }}" readonly>
         </div>
         <div class="form-group">
             <label for="gambar_sampul">Gambar Sampul</label><br>
