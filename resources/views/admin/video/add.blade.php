@@ -15,8 +15,12 @@
 
     <form action="/admin/list-video" method="POST"  enctype="multipart/form-data" >
         @csrf
+        @method('put')
         <div class="form-group">
             <label for="gambar_sampul">Upload Gambar Sampul</label><br>
+            @if ($video->gambar_sampul)
+                <p>{{$video->gambar_sampul}}</p>
+            @endif
             <input type="file" class="form-control" name="gambar_sampul" id="gambar_sampul">
             @error('gambar_sampul')
                 <div class="alert alert-danger">
@@ -35,7 +39,10 @@
         </div>
         <div class="form-group">
             <label for="konten">Upload Konten Video</label><br>
-            <input type="file" class="form-control" name="konten" id="konten">
+            @if ($video->gambar_sampul)
+                <p>{{$video->gambar_sampul}}</p>
+            @endif
+            <input type="file" name="konten" class="form-control" cols="30" rows="10"{{$video->konten}}>
             @error('konten')
                 <div class="alert alert-danger">
                     {{ $message }}
