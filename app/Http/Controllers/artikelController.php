@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\ArticleAdmin;
+use App\Models\VideoAdmin;
 use Share;
 use DB;
 
@@ -27,10 +28,14 @@ class artikelController extends Controller
                 ->orderBy('id', 'asc') 
                 ->take(3) 
                 ->get();
+        
+        $video = VideoAdmin::orderBy('id', 'asc') 
+                ->take(3) 
+                ->get();
 
-        // dd($artikel);
+        // dd($video);
       
-        return view('beranda.index', compact('artikel'));
+        return view('beranda.index', compact('artikel','video'));
     }
 
     public function show($id){
