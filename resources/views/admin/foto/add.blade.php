@@ -57,7 +57,7 @@
         </div>
         <div class="form-group">
             <label for="konten">Konten</label><br>
-            <input type="file" class="form-control" name="konten" id="konten">
+            <input type="file" class="form-control" name="konten[]" id="konten[]" multiple>
             @error('konten')
                 <div class="alert alert-danger">
                     {{ $message }}
