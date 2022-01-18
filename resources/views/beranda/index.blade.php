@@ -167,10 +167,10 @@
   <div class="container artikel mb-5 mt-5">
     <h3 class="mb-4" style="font-family: Inter, sans-serif">Foto</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      {{-- @foreach ($foto as $item)
+      @foreach ($foto as $item)
       <a href="foto/{{$item->id}}"></a>  
       <div class="col">
-        <div class="card h-100 hover-card">
+        <div class="card h-100 hover-card" data-bs-toggle="modal" data-bs-target="#audioPlayer{{$item->id}}">
           <img src="{{ asset('fotoProd/'.$item->gambar_sampul) }}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{ $item->judul }}</h5>
@@ -178,34 +178,7 @@
           </div>
         </div>
       </div>
-      @endforeach --}}
-      <div class="col">
-        <div class="card h-100 hover-card">
-          <img src="img/slide3.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Launching Kampung Keren</h5>
-            <p class="card-text">Dana untuk pemberdayaan warga di level RT di Kota Kediri melalui program pemberdayaan masyarakat (Prodamas) plus bakal dikucurkan.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 hover-card">
-          <img src="img/slide4.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Kampung Keren</h5>
-            <p class="card-text"> Di mana alokasi anggaran Prodamas Plus mencapai Rp 100 juta per RT per tahun yang akan mencakup enam bidang kegiatan. Pemkot Kediri Kucurkan Rp 100 Juta Per RT.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 hover-card">
-          <img src="img/slide5.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Prodamas</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
     <a href="{{ url('foto') }}">
       <h6 class="text-end mt-3"><u>Info Lainnya <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -213,15 +186,51 @@
           </svg></u></h6>
     </a>
   </div>
+
+@foreach ($foto as $item)
+{{-- Card Modal --}}
+<div class="modal fade" id="audioPlayer{{$item->id}}" tabindex="-1" aria-labelledby="audioPlayerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+          <div class="modal-header ">
+              <h5 class="modal-title" id="fotoLabel">{{ $item->judul }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="row row-cols-1 row-cols-md-3 mb-2 g-4 videoPlayerBox centerItms">
+                  <div class="col-6" style="width: 25rem;
+                  border: none;
+                  margin: 0;  
+                  margin-top: 30px;
+                  ">
+                      <img class="max-width: 500px" src="{{ asset('fotoProd/'. $item->konten)}}" width="520" height="340" controls>
+                  </div>
+                  <div class="card" style="
+                  width: 25rem; 
+                  border: none;
+                  ">
+                      <h3>{{ $item->judul }}</h3>
+                      <p>{{ $item->caption }}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+          </div>
+      </div>
+  </div>
+</div>
+{{-- Akhir Card foto --}}
+@endforeach
   <!--end foto-->
 
   <!--audio-->
   <div class="container artikel mb-5 mt-5">
     <h3 class="mb-4" style="font-family: Inter, sans-serif">Audio</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
-      {{-- @foreach ($audio as $item) 
+      @foreach ($audio as $item) 
       <div class="col">
-        <div class="card h-100 hover-card">
+        <div class="card h-100 hover-card" data-bs-toggle="modal" data-bs-target="#audioPlayer{{$item->id}}">
           <img src="{{ asset('audioProd/thumb'.$item->gambar_sampul) }}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{ $item->judul }}</h5>
@@ -229,34 +238,7 @@
           </div>
         </div>
       </div>
-      @endforeach --}}
-      <div class="col">
-        <div class="card h-100 hover-card">
-          <img src="img/slide3.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Launching Kampung Keren</h5>
-            <p class="card-text">Dana untuk pemberdayaan warga di level RT di Kota Kediri melalui program pemberdayaan masyarakat (Prodamas) plus bakal dikucurkan.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 hover-card">
-          <img src="img/slide4.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Kampung Keren</h5>
-            <p class="card-text"> Di mana alokasi anggaran Prodamas Plus mencapai Rp 100 juta per RT per tahun yang akan mencakup enam bidang kegiatan. Pemkot Kediri Kucurkan Rp 100 Juta Per RT.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100 hover-card">
-          <img src="img/slide5.jpeg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Prodamas</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </div>
     <a href="{{ url('audio') }}">
       <h6 class="text-end mt-3"><u>Info Lainnya <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
@@ -264,6 +246,46 @@
           </svg></u></h6>
     </a>
   </div>
+
+  @foreach ($audio as $item)    
+  {{-- Card Modal --}}
+  <div class="modal fade" id="audioPlayer{{$item->id}}" tabindex="-1" aria-labelledby="audioPlayerLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+              <div class="modal-header ">
+                  <h5 class="modal-title" id="audioPlayerLabel">{{ $item->judul }}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="row row-cols-1 row-cols-md-3 mb-2 g-4 audioPlayerBox centerItms">
+                      <div class="card" style="
+                          width: 25rem;
+                          border: none;
+                          margin-right:1em;
+                          ">
+                          <img src="{{ asset('/audioProd/thumb/'.$item->gambar_sampul) }}" class="d-flex justify-content" style="width: 100%;" alt="...">
+                          <audio controls style="width: 100%;">
+                              <source src="{{ asset('/audioProd/fileaudio/'.$item->konten) }}" type="audio/mpeg">
+                              Your browser does not support the audio element.
+                          </audio>
+                      </div>
+                      <div class="card" style="
+                      width: 25rem;
+                      border: none;
+                      ">
+                          <h1> {{$item->judul}}</h1>
+                          <p>{{$item->caption}}</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  {{-- Akhir Card Audio --}}
+  @endforeach
   <!--end audio-->
 
   <!--berlangganan-->
